@@ -1,5 +1,10 @@
 <?php
 
+require_once "clases.php";
+require_once "_dao.php";
+
+
+$mensajes = DAO::mensajeObtenerTodos();             //llamo a la función obtener todos para sacar todos los mensajes como un objeto, y poder llamarlos con getMensaje etc
 ?>
 <html>
 <head>
@@ -35,7 +40,7 @@
 
 <div class="contenidoMensajes">
 
-    <?//php foreach ($mensajes as $fila) { ?>
+    <?php foreach ($mensajes as $mensaje) { ?>                           <!-- mensajes de la variable con la funcion de arriba, recorre el array que nos da la función mensajeObtenerTodos(), y le asigno a cada tr su valor get...   -->
         <table>
             <tr id="columnasNombres">
                 <td>Usuario</td>
@@ -44,12 +49,18 @@
             </tr>
             <br>
             <tr>
-                <td> <?php // echo <?=$producto->getId()?>'><?=$producto->getNombre()?> ?> pepe</td>
-                <td> <?php // echo $fila["texto"]; ?>texto ejemplo </td>
-                <td> <?php // echo $fila["fecha"]; ?> 20/01/2019 </td>
+                <td>
+                    <?=$mensaje->getFecha()?>
+                </td>
+                <td>
+                    <?=$mensaje->getMensaje()?>
+                </td>
+                <td>
+                    <?=$mensaje->getIdentificador()?>
+                </td>
             </tr>
+            <?php } ?>
         </table>
-    <? //php } ?>
 </div>
 <div class="fromMensajes" style="margin-top: 5px">
     <form>
@@ -59,5 +70,7 @@
 </div>
 
 <div>
-    <a href="cerrar-sesion.php">cerrar sesion actual</a>
+   <!-- <a href="cerrar-sesion.php">cerrar sesion actual</a> -->
 </div>
+</body>
+</html>

@@ -1,9 +1,5 @@
 <?php
 
-abstract class Dato{
-
-}
-
 trait Identificable
 {
     protected $id;
@@ -103,17 +99,17 @@ class Usuario  {
 class Mensaje{
 
     private $fecha;
-    private $texto;
+    private $mensaje;
     private $identificador;
 
-    public function __construct($fecha, $texto, $identificador)
+    public function __construct($fecha, $mensaje, $identificador)
     {
         $this->fecha = $fecha;
-        $this->texto = $texto;
+        $this->mensaje = $mensaje;
         $this->identificador = $identificador;
     }
 
-    public function getFecha()
+    public function getFecha(): string
     {
         return $this->fecha;
     }
@@ -124,15 +120,15 @@ class Mensaje{
         $this->fecha = $fecha;
     }
 
-    public function getTexto()
+    public function getMensaje()
     {
-        return $this->texto;
+        return $this->mensaje;
     }
 
 
-    public function setTexto($texto)
+    public function setMensaje($mensaje)
     {
-        $this->texto = $texto;
+        $this->mensaje = $mensaje;
     }
 
 
@@ -146,7 +142,5 @@ class Mensaje{
     {
         $this->identificador = $identificador;
     }
-    
-
 }
 ?>
