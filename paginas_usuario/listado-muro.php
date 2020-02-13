@@ -44,7 +44,7 @@
             </tr>
             <br>
             <tr>
-                <td> <?php // echo $fila["identificador"]; ?> pepe</td>
+                <td> <?php // echo <?=$producto->getId()?>'><?=$producto->getNombre()?> ?> pepe</td>
                 <td> <?php // echo $fila["texto"]; ?>texto ejemplo </td>
                 <td> <?php // echo $fila["fecha"]; ?> 20/01/2019 </td>
             </tr>
