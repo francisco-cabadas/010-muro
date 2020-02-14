@@ -103,7 +103,7 @@ class Mensaje{
     private $identificador;
 
     public function __construct($fecha, $mensaje, $identificador)
-    {
+{
         $this->fecha = $fecha;
         $this->mensaje = $mensaje;
         $this->identificador = $identificador;
