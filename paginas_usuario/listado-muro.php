@@ -3,10 +3,8 @@
 require_once "clases.php";
 require_once "_dao.php";
 $identificador=DAO::usuarioObtenerPorId("fran");
-
-
-
 $mensajes = DAO::mensajeObtenerTodos();             //llamo a la función obtener todos para sacar todos los mensajes como un objeto, y poder llamarlos con getMensaje etc
+
 ?>
 <html>
 <head>
@@ -48,18 +46,21 @@ $mensajes = DAO::mensajeObtenerTodos();             //llamo a la función obtene
                 <td>Usuario</td>
                 <td>Mensaje</td>
                 <td>Fecha</td>
+                <form>
+                    <td><a href="mensaje-borrar-ejecutar.php?id=<?=$mensaje->getId() ?>">Borrar Mensaje</a></td>
+                </form>
             </tr>
             <br>
             <tr>
                 <td>
-                    <?=$mensaje->getIdentificador()?>
+                    <?= $mensaje->getIdentificador() ?>
 
                 </td>
                 <td>
-                    <?=$mensaje->getMensaje()?>
+                    <?= $mensaje->getMensaje() ?>
                 </td>
                 <td>
-                    <?=$mensaje->getFecha()?>
+                    <?= $mensaje->getFecha() ?>
                 </td>
             </tr>
             <?php } ?>

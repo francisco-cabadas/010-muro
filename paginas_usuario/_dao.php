@@ -58,7 +58,7 @@ class DAO
         $rs = self::ejecutarConsulta("SELECT * FROM mensajes", []);
 
         foreach ($rs as $fila) {
-            $mensaje = new Mensaje($fila["identificador"], $fila["mensaje"], $fila["fecha"]);
+            $mensaje = new Mensaje($fila["identificador"], $fila["mensaje"], $fila["fecha"], $fila["id"]);
             array_push($datos, $mensaje);
         }
         return $datos;
@@ -69,6 +69,14 @@ class DAO
         $sql = "INSERT INTO mensajes (identificador, mensaje, fecha) VALUES (?, ?, ?);";
         self::ejecutarActualizacion($sql, [$identificador,$mensaje,$fecha]);
     }
+
+    public static function borrarMensaje($id)
+    {
+        $sql = "DELETE from mensajes WHERE id=?;";
+        self::ejecutarActualizacion($sql, [$id]);
+    }
+
+
 
 
 //--------------------------------------para usuario

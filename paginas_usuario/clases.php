@@ -119,15 +119,17 @@ class Mensaje{
     private $identificador;
     private $mensaje;
     private $fecha;
+    use Identificable;
 
 
 
-    public function __construct($identificador, $mensaje, $fecha)
+    public function __construct($identificador, $mensaje, $fecha, $id)
     {
 
         $this->identificador = $identificador;
         $this->mensaje = $mensaje;
         $this->fecha = $fecha;
+        $this->id=$id;
 
     }
 
