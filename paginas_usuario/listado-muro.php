@@ -2,7 +2,7 @@
 
 require_once "clases.php";
 require_once "_dao.php";
-$identificador=DAO::usuarioObtenerPorId("fran_95");
+$identificador=DAO::usuarioObtenerPorId("fran");
 
 
 

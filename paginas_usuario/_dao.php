@@ -10,7 +10,7 @@ class DAO
         $servidor = "localhost";
         $identificador = "root";
         $contrasenna = "";
-        $bd = "muro"; // Schema
+        $bd = "minifb"; // Schema
         $opciones = [
             PDO::ATTR_EMULATE_PREPARES => false, // Modo emulación desactivado para prepared statements "reales"
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, // Que los errores salgan como excepciones.
@@ -55,19 +55,19 @@ class DAO
     public static function mensajeObtenerTodos(): array
     {
         $datos = [];
-        $rs = self::ejecutarConsulta("SELECT * FROM publicacion", []);
+        $rs = self::ejecutarConsulta("SELECT * FROM mensajes", []);
 
         foreach ($rs as $fila) {
-            $mensaje = new Mensaje($fila["fecha"], $fila["mensaje"], $fila["identificador"]);
+            $mensaje = new Mensaje($fila["identificador"], $fila["mensaje"], $fila["fecha"]);
             array_push($datos, $mensaje);
         }
         return $datos;
     }
 
-    public static function agregarMensaje($fecha, $mensaje, $identificador)
+    public static function agregarMensaje($identificador, $mensaje, $fecha)
     {
-        self::ejecutarActualizacion("INSERT INTO publicacion (fecha, mensaje, identificador) VALUES (?, ?, ?);",
-            [$fecha, $mensaje, $identificador]);
+        $sql = "INSERT INTO mensajes (identificador, mensaje, fecha) VALUES (?, ?, ?);";
+        self::ejecutarActualizacion($sql, [$identificador,$mensaje,$fecha]);
     }
 
 
@@ -75,7 +75,7 @@ class DAO
 
     private static function crearUsuarioDesdeRs(array $rs): Usuario
     {
-        return new Usuario($rs[0]["id"], $rs[0]["identificador"], $rs[0]["Nombre"], $rs[0]["apellidos"], $rs[0]["correo"], $rs[0]["contrasenna"]);
+        return new Usuario($rs[0]["id"], $rs[0]["identificador"], $rs[0]["contrasenna"], $rs[0]["codigoCookie"], $rs[0]["tipoUsuario"], $rs[0]["nombre"], $rs[0]["apellidos"]);
     }
 
 

@@ -14,24 +14,27 @@ trait Identificable
         $this->id = $id;
     }
 }
-class Usuario  {
+class Usuario
+{
     use Identificable;
 
-    private  $identificador;
-    private  $nombre;
-    private  $apellidos;
-    private  $correo;
-    private  $contraseña;
+    private $identificador;
+    private $contrasenna;
+    private $codigoCookie;
+    private $tipoUsuario;
+    private $nombre;
+    private $apellidos;
 
 
-    public function __construct($id, $identificador, $nombre, $apellidos, $correo, $contraseña)
+    public function __construct($id,$identificador, $contrasenna, $codigoCookie, $tipoUsuario, $nombre, $apellidos)
     {
         $this->id=$id;
         $this->identificador = $identificador;
+        $this->contrasenna = $contrasenna;
+        $this->codigoCookie = $codigoCookie;
+        $this->tipoUsuario = $tipoUsuario;
         $this->nombre = $nombre;
         $this->apellidos = $apellidos;
-        $this->correo = $correo;
-        $this->contraseña = $contraseña;
     }
 
 
@@ -41,9 +44,46 @@ class Usuario  {
     }
 
 
-    public function setIdentificador($identificador)
+
+    public function setIdentificador($identificador): void
     {
         $this->identificador = $identificador;
+    }
+
+
+    public function getContrasenna()
+    {
+        return $this->contrasenna;
+    }
+
+
+    public function setContraseña($contrasenna): void
+    {
+        $this->contrasenna = $contrasenna;
+    }
+
+
+    public function getCodigoCookie()
+    {
+        return $this->codigoCookie;
+    }
+
+
+    public function setCodigoCookie($codigoCookie): void
+    {
+        $this->codigoCookie = $codigoCookie;
+    }
+
+
+    public function getTipoUsuario()
+    {
+        return $this->tipoUsuario;
+    }
+
+
+    public function setTipoUsuario($tipoUsuario): void
+    {
+        $this->tipoUsuario = $tipoUsuario;
     }
 
 
@@ -53,7 +93,7 @@ class Usuario  {
     }
 
 
-    public function setNombre($nombre)
+    public function setNombre($nombre): void
     {
         $this->nombre = $nombre;
     }
@@ -65,48 +105,30 @@ class Usuario  {
     }
 
 
-    public function setApellidos($apellidos)
+    public function setApellidos($apellidos): void
     {
         $this->apellidos = $apellidos;
     }
 
 
-    public function getCorreo()
-    {
-        return $this->correo;
-    }
-
-
-    public function setCorreo($correo)
-    {
-        $this->correo = $correo;
-    }
-
-
-    public function getContraseña()
-    {
-        return $this->contraseña;
-    }
-
-
-    public function setContraseña($contraseña)
-    {
-        $this->contraseña = $contraseña;
-    }
 
 
 }
 class Mensaje{
 
-    private $fecha;
-    private $mensaje;
     private $identificador;
+    private $mensaje;
+    private $fecha;
 
-    public function __construct($fecha, $mensaje, $identificador)
-{
-        $this->fecha = $fecha;
-        $this->mensaje = $mensaje;
+
+
+    public function __construct($identificador, $mensaje, $fecha)
+    {
+
         $this->identificador = $identificador;
+        $this->mensaje = $mensaje;
+        $this->fecha = $fecha;
+
     }
 
     public function getFecha(): string
