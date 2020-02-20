@@ -4,7 +4,7 @@ trait Identificable
 {
     protected $id;
 
-    public function getId(): int
+    public function getId(): int                //copia y pega
     {
         return $this->id;
     }

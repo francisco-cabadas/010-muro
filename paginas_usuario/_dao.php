@@ -8,7 +8,7 @@ class DAO
     private static function obtenerPdoConexionBD()
     {
         $servidor = "localhost";
-        $identificador = "root";
+        $identificador = "root";                        //copia pega
         $contrasenna = "";
         $bd = "minifb"; // Schema
         $opciones = [
@@ -33,7 +33,7 @@ class DAO
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
 
         $select = self::$pdo->prepare($sql);
-        $select->execute($parametros);
+        $select->execute($parametros);                     //copia pega
         return $select->fetchAll();
     }
 
@@ -41,7 +41,7 @@ class DAO
     {
         if (!isset(self::$pdo)) self::$pdo = self::obtenerPdoConexionBd();
 
-        $actualizacion = self::$pdo->prepare($sql);
+        $actualizacion = self::$pdo->prepare($sql);                             //copia pega
         $actualizacion->execute($parametros);
     }
 
@@ -91,7 +91,7 @@ class DAO
     // ($identificador=DAO::usuarioObtenerPorId("fran_95") -->aquí podemos pasarle la saesion o cookie de usuario;
     // $identificador->getNombre();)
 
-    public static function usuarioObtenerPorId($identificador): Usuario
+    public static function usuarioObtenerPorIdentificador($identificador): Usuario
     {
         $rs = self::ejecutarConsulta("SELECT * FROM usuario WHERE identificador=?", [$identificador]);
         if ($rs) return self::crearUsuarioDesdeRs($rs);

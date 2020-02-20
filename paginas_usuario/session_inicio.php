@@ -1,6 +1,7 @@
 <?php
 
-//require_once " ";
+require_once "_dao.php";
+require_once "_clases.php"
 
 //if (haySesionIniciada()) redireccionar(" ");
 
