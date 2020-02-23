@@ -1,7 +1,14 @@
 <?php
 
+require_once "_sesiones.php";
 require_once "_clases.php";
 require_once "_dao.php";
+require_once "_utilidades.php";
+
+garantizarSesion();
+echo ($_SESSION["identificador"]);
+
+
 
 $mensajes = DAO::mensajeObtenerTodos();             //llamo a la función obtener todos para sacar todos los mensajes como un objeto, y poder llamarlos con getMensaje etc
 
@@ -76,7 +83,7 @@ $mensajes = DAO::mensajeObtenerTodos();             //llamo a la función obtene
 
 
 <div>
-   <!-- <a href="cerrar-sesion.php">cerrar sesion actual</a> -->
+    <a href="session-cerrar.php">cerrar sesion actual</a>
 </div>
 </body>
 </html>

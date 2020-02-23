@@ -46,6 +46,40 @@ class DAO
     }
 
 
+    public static function usuarioObtenerPorIdentificadorContaseña($identificador, $contrasenna): Usuario        //se utiliza para iniciar sesion contra la bdd
+    {
+        $rs = self::ejecutarConsulta("SELECT * FROM usuario WHERE identificador=? AND BINARY contrasenna=?",
+            [$identificador, $contrasenna]);
+        if ($rs) {
+            return self::crearUsuarioDesdeRs($rs);
+        } else {
+            return null;
+        }
+    }
+
+    public static function usuarioObtenerPorIdentificadorYCodigoCookie($identificador, $codigoCookie): Usuario
+    {
+        $rs = self::ejecutarConsulta("SELECT * FROM usuario WHERE identificador=? AND BINARY codigoCookie=?",
+            [$identificador, $codigoCookie]);
+        if ($rs) {
+            return self::crearUsuarioDesdeRs($rs);
+        } else {
+            return null;
+        }
+    }
+
+
+    public static function clienteGuardarCodigoCookie(string $identificador, string $codigoCookie = null)
+    {
+        if ($codigoCookie != null)
+        {
+            self::ejecutarActualizacion("UPDATE usuario SET codigoCookie=? WHERE identificador=?", [$codigoCookie, $identificador]);
+        } else {
+            self::ejecutarActualizacion("UPDATE usuario SET codigoCookie=NULL WHERE identificador=?", [$identificador]);
+        }
+
+    }
+
 
 
 
@@ -98,4 +132,6 @@ class DAO
         else return null;
     }
 }
+
+
 ?>
