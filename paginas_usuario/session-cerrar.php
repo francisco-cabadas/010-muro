@@ -1,17 +1,18 @@
 <?php
-require_once "_sesiones.php";
-require_once "_clases.php";
-require_once "_dao.php";
-//$usuarioSesion=$_SESSION["identificador"];
+require_once "../_requireOnces/requireOnces.php";
 
-destruirSesionYCookies($_SESSION["identificador"]);
+sessionStartSiNoLoEsta();
 
-redireccionar("sesion-inicio.php");
+$usuarioSesion=DAO::usuarioObtenerPorIdentificador($_SESSION["identificador"]);
+
+destruirSesionYCookies($usuarioSesion->getIdentificador());
+
 
 ?>
 
 <html>
 <body>
-<p>Sesion de <?= $usuario ?> ha finalizado sesion correctamente</p>
+<p>Sesion de <?= $usuarioSesion->getIdentificador() ?> con apellido <?= $usuarioSesion->getApellidos() ?>   ha finalizado sesion correctamente</p>
+<a href="session-inicio.php">Volver a inicio de sesión</a>
 </body>
 </html>

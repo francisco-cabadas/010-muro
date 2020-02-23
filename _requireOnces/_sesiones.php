@@ -1,8 +1,6 @@
 <?php
 
-require_once "_dao.php";
-require_once "_clases.php";
-require_once "_utilidades.php";
+require_once "../_requireOnces/requireOnces.php";
 
 
 function sessionStartSiNoLoEsta()      //hace el session_start(),
@@ -15,6 +13,7 @@ function sessionStartSiNoLoEsta()      //hace el session_start(),
 // Comprueba si hay sesión-usuario iniciada en la sesión-RAM.
 function haySesionIniciada()
 {
+
     sessionStartSiNoLoEsta();
     return isset($_SESSION['sesionIniciada']);
 }
@@ -56,7 +55,7 @@ function garantizarSesion()
             }
         } else if (vieneCookieRecuerdame()) {
             $usuario = DAO::usuarioObtenerPorIdentificadorYCodigoCookie($_COOKIE["identificador"], $_COOKIE["codigoCookie"]);
-//aqui me quedé
+
             if ($usuario) { // Si viene un usuario es que existe el usuario y coincide el código cookie. Daremos por iniciada la sesión.
                 // Recuperar los datos adicionales del usuario que acaba de iniciar sesión.
                 anotarDatosSesionRam($usuario);
@@ -89,7 +88,7 @@ function generarCookieRecuerdame($usuario)
 {
     // Creamos un código cookie muy complejo (no necesariamente único).
     $codigoCookie = generarCadenaAleatoria(32); // Random...
-    DAO::clienteGuardarCodigoCookie($usuario->getIdetificador(), $codigoCookie);
+    DAO::clienteGuardarCodigoCookie($usuario->getIdentificador(), $codigoCookie);
 
     // TODO Para una seguridad óptima convendriá anotar en la BD la fecha de caducidad de la cookie y no aceptar ninguna cookie pasada dicha fecha.
 
@@ -105,7 +104,7 @@ function borrarCookieRecuerdame($identificador)
     setcookie("codigoCookie", "", time() - 3600); // Tiempo en el pasado, para (pedir) borrar la cookie.
 }
 
-function anotarDatosSesionRam($usuario)
+function anotarDatosSesionRam($usuario)         //guarda en sesión todos los datos de usuario.
 {
     $_SESSION["sesionIniciada"] = "";
     $_SESSION["id"] = $usuario->getId();
@@ -116,6 +115,7 @@ function anotarDatosSesionRam($usuario)
 
 function destruirSesionYCookies($identificador)
 {
+
     session_destroy();
 
     borrarCookieRecuerdame($identificador);

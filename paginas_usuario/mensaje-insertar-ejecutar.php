@@ -1,11 +1,12 @@
 <?php
-require_once "_clases.php";
-require_once "_dao.php";
+
+require_once "../_requireOnces/requireOnces.php";
+
+garantizarSesion();
+
+$usuario= DAO::usuarioObtenerPorIdentificador($_SESSION["identificador"]);
 $mensaje = $_REQUEST["nuevoMensaje"];
-DAO::agregarMensaje("peter", $mensaje, null);  //añadir sesion para el identificador
-//header("Location:listado-muro.php");
-//$usuario = $_SESSION["nuevoMensaje"]; //IMPLEMENTAR
-$usuario= DAO::usuarioObtenerPorIdentificador("fran"); //poner session en
+DAO::agregarMensaje($usuario->getIdentificador(), $mensaje, null);
 
 ?>
 
